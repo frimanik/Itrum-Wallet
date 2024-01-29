@@ -23,6 +23,7 @@ import java.util.concurrent.Executors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//Ideally there should be integration test that would send requests directly to controllers
 @SpringBootTest
 class WalletInteractionServiceTest {
 

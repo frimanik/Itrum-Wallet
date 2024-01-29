@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: frimanik
+
+      changes:
+        - createTable:
+            tableName: wallet
+            columns:
+              - column:
+                  name: vallet_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: balance
+                  type: money
+
+  - changeSet:
+      id: 2
+      author: frimanik
+      changes:
+        - insert:
+            tableName: wallet
+            columns:
+              - column:
+                  name: vallet_id
+                  value: 55cb8c8f-7a71-4207-ab0a-0a7e7dd9fa97
+              - column:
+                  name: balance
+                  value: 1000
+        - insert:
+            tableName: wallet
+            columns:
+              - column:
+                  name: vallet_id
+                  value: b9176c9c-a824-4b1f-a057-d0f4e884fece
+              - column:
+                  name: balance
+                  value: 10000
+        - insert:
+            tableName: wallet
+            columns:
+              - column:
+                  name: vallet_id
+                  value: 94b77bbb-fb7e-4d6b-b8bf-b80eb3cbdbf7
+              - column:
+                  name: balance
+                  value: 1

@@ -28,7 +28,7 @@ public class WalletInteractionController {
 
     @PostMapping("api/v1/wallet")
     public Wallet UpdateWallet(@Valid @RequestBody WalletDto walletDto) {
-         return walletRepository.save(walletInteractionService.updateWallet(walletDto,walletRepository));
+         return walletInteractionService.updateWallet(walletDto,walletRepository);
     }
 
     @GetMapping("api/v1/wallets/{WALLET_UUID}")

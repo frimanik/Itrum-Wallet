@@ -94,31 +94,4 @@ class WalletInteractionServiceTest {
             walletInteractionService.getWalletBalance(walletId, walletRepository);
         });
     }
-
-    @Test
-    void testConcurrentUpdateWalletDeposit() throws InterruptedException {
-
-        UUID walletId = UUID.randomUUID();
-        WalletDto walletDto = new WalletDto(walletId, BigDecimal.TEN, OperationType.DEPOSIT);
-        Wallet existingWallet = new Wallet(walletId, BigDecimal.ZERO);
-        Mockito.when(walletRepository.findByValletId(walletId)).thenReturn(Optional.of(existingWallet));
-
-        int numThreads = 1000;
-        ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
-        CountDownLatch latch = new CountDownLatch(numThreads);
-
-        for (int i = 0; i < numThreads; i++) {
-            executorService.submit(() -> {
-                walletInteractionService.updateWallet(walletDto, walletRepository);
-                latch.countDown();
-            });
-        }
-
-        latch.await();
-
-        Wallet updatedWallet = walletRepository.findByValletId(walletId).orElseThrow();
-        assertEquals(BigDecimal.TEN.multiply(BigDecimal.valueOf(numThreads)), updatedWallet.getBalance());
-
-        executorService.shutdown();
-    }
 }

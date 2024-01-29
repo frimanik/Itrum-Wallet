@@ -35,5 +35,15 @@ public class WalletInteractionController {
     public String GetWallet(@Valid @PathVariable UUID WALLET_UUID) {
         return walletInteractionService.getWalletBalance(WALLET_UUID,walletRepository);
     }
+
+    @ExceptionHandler(WalletNotFoundException.class)
+    public ResponseEntity<String> WalletNotFoundException(WalletNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InsufficientBalanceException.class)
+    public ResponseEntity<String> handleInsufficientBalanceException(InsufficientBalanceException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }
 

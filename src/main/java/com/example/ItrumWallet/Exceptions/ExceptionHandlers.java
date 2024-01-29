@@ -12,6 +12,6 @@ public class ExceptionHandlers {
 
     @ExceptionHandler(InsufficientBalanceException.class)
     public ResponseEntity<String> handleInsufficientBalanceException(InsufficientBalanceException ex) {
-        return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 }
